@@ -1,39 +1,43 @@
-"""Welcome to the API references for TextAttack!
+""".. _attack_recipes:
 
-What is TextAttack?
+Attack Recipes Package:
+========================
 
-`TextAttack <https://github.com/QData/TextAttack>`__ is a Python framework for adversarial attacks, adversarial training, and data augmentation in NLP.
+We provide a number of pre-built attack recipes, which correspond to attacks from the literature. To run an attack recipe from the command line, run::
 
-TextAttack makes experimenting with the robustness of NLP models seamless, fast, and easy. It's also useful for NLP model training, adversarial training, and data augmentation.
+    textattack attack --recipe [recipe_name]
 
-TextAttack provides components for common NLP tasks like sentence encoding, grammar-checking, and word replacement that can be used on their own.
+To initialize an attack in Python script, use::
+
+    <recipe name>.build(model_wrapper)
+
+For example, ``attack = InputReductionFeng2018.build(model)`` creates `attack`, an object of type ``Attack`` with the goal function, transformation, constraints, and search method specified in that paper. This object can then be used just like any other attack; for example, by calling ``attack.attack_dataset``.
+
+TextAttack supports the following attack recipes (each recipe's documentation contains a link to the corresponding paper):
+
+.. contents:: :local:
 """
-from .attack_args import AttackArgs, CommandLineAttackArgs
-from .augment_args import AugmenterArgs
-from .dataset_args import DatasetArgs
-from .model_args import ModelArgs
-from .training_args import TrainingArgs, CommandLineTrainingArgs
-from .attack import Attack
-from .attacker import Attacker
-from .trainer import Trainer
-from .metrics import Metric
 
-from . import (
-    attack_recipes,
-    attack_results,
-    augmentation,
-    commands,
-    constraints,
-    datasets,
-    goal_function_results,
-    goal_functions,
-    loggers,
-    metrics,
-    models,
-    search_methods,
-    shared,
-    transformations,
-)
+from .attack_recipe import AttackRecipe
 
-
-name = "textattack"
+from .a2t_yoo_2021 import A2TYoo2021
+from .bae_garg_2019 import BAEGarg2019
+from .bert_attack_li_2020 import BERTAttackLi2020
+from .genetic_algorithm_alzantot_2018 import GeneticAlgorithmAlzantot2018
+from .faster_genetic_algorithm_jia_2019 import FasterGeneticAlgorithmJia2019
+from .deepwordbug_gao_2018 import DeepWordBugGao2018
+from .hotflip_ebrahimi_2017 import HotFlipEbrahimi2017
+from .input_reduction_feng_2018 import InputReductionFeng2018
+from .kuleshov_2017 import Kuleshov2017
+from .morpheus_tan_2020 import MorpheusTan2020
+from .seq2sick_cheng_2018_blackbox import Seq2SickCheng2018BlackBox
+from .textbugger_li_2018 import TextBuggerLi2018
+from .textfooler_jin_2019 import TextFoolerJin2019
+from .pwws_ren_2019 import PWWSRen2019
+from .iga_wang_2019 import IGAWang2019
+from .pruthi_2019 import Pruthi2019
+from .pso_zang_2020 import PSOZang2020
+from .checklist_ribeiro_2020 import CheckList2020
+from .clare_li_2020 import CLARE2020
+from .french_recipe import FrenchRecipe
+from .spanish_recipe import SpanishRecipe
